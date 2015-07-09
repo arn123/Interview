@@ -19,8 +19,9 @@
 		B37A75651B4E90AB00B46EE2 /* ServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37A75641B4E90AB00B46EE2 /* ServerController.m */; };
 		B37A75A21B4EAFE800B46EE2 /* UsersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37A75A11B4EAFE800B46EE2 /* UsersTableViewController.m */; };
 		B37A75A81B4EB45B00B46EE2 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B37A75A71B4EB45B00B46EE2 /* LoginViewController.m */; };
-		B37A75AB1B4EB51300B46EE2 /* TextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B37A75AA1B4EB51300B46EE2 /* TextFieldValidator.m */; };
 		B37A75AE1B4EBAE200B46EE2 /* Users.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B37A75AC1B4EBAE200B46EE2 /* Users.xcdatamodeld */; };
+		B3FB67B21B4EF47C007263A4 /* TextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FB67B11B4EF47C007263A4 /* TextFieldValidator.m */; };
+		B3FB67B51B4EF496007263A4 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FB67B41B4EF496007263A4 /* UserTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,9 +60,11 @@
 		B37A75A11B4EAFE800B46EE2 /* UsersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersTableViewController.m; sourceTree = "<group>"; };
 		B37A75A61B4EB45B00B46EE2 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B37A75A71B4EB45B00B46EE2 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		B37A75A91B4EB51300B46EE2 /* TextFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldValidator.h; sourceTree = "<group>"; };
-		B37A75AA1B4EB51300B46EE2 /* TextFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldValidator.m; sourceTree = "<group>"; };
 		B37A75AD1B4EBAE200B46EE2 /* Users.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Users.xcdatamodel; sourceTree = "<group>"; };
+		B3FB67B01B4EF47C007263A4 /* TextFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldValidator.h; sourceTree = "<group>"; };
+		B3FB67B11B4EF47C007263A4 /* TextFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldValidator.m; sourceTree = "<group>"; };
+		B3FB67B31B4EF496007263A4 /* UserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
+		B3FB67B41B4EF496007263A4 /* UserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +129,9 @@
 			children = (
 				B37A75501B4E8F2000B46EE2 /* Model */,
 				B37A754F1B4E8F1200B46EE2 /* Controllers */,
+				B3FB67AF1B4EF441007263A4 /* Views */,
 				B37A752C1B4E7D0B00B46EE2 /* AppDelegate.h */,
 				B37A752D1B4E7D0B00B46EE2 /* AppDelegate.m */,
-				B37A75A91B4EB51300B46EE2 /* TextFieldValidator.h */,
-				B37A75AA1B4EB51300B46EE2 /* TextFieldValidator.m */,
 				B37A75321B4E7D0B00B46EE2 /* Main.storyboard */,
 				B37A75351B4E7D0B00B46EE2 /* Images.xcassets */,
 				B37A75371B4E7D0B00B46EE2 /* LaunchScreen.xib */,
@@ -187,6 +189,17 @@
 				B37A75AC1B4EBAE200B46EE2 /* Users.xcdatamodeld */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B3FB67AF1B4EF441007263A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B3FB67B01B4EF47C007263A4 /* TextFieldValidator.h */,
+				B3FB67B11B4EF47C007263A4 /* TextFieldValidator.m */,
+				B3FB67B31B4EF496007263A4 /* UserTableViewCell.h */,
+				B3FB67B41B4EF496007263A4 /* UserTableViewCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,12 +339,13 @@
 			files = (
 				B37A75651B4E90AB00B46EE2 /* ServerController.m in Sources */,
 				B37A75A81B4EB45B00B46EE2 /* LoginViewController.m in Sources */,
-				B37A75AB1B4EB51300B46EE2 /* TextFieldValidator.m in Sources */,
+				B3FB67B51B4EF496007263A4 /* UserTableViewCell.m in Sources */,
 				B37A755F1B4E905600B46EE2 /* User.m in Sources */,
 				B37A75AE1B4EBAE200B46EE2 /* Users.xcdatamodeld in Sources */,
 				B37A752E1B4E7D0B00B46EE2 /* AppDelegate.m in Sources */,
 				B37A755E1B4E905600B46EE2 /* Account.m in Sources */,
 				B37A75A21B4EAFE800B46EE2 /* UsersTableViewController.m in Sources */,
+				B3FB67B21B4EF47C007263A4 /* TextFieldValidator.m in Sources */,
 				B37A752B1B4E7D0B00B46EE2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Users/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -473,6 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Users/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

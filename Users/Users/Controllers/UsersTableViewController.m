@@ -7,10 +7,12 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "UsersTableViewController.h"
 #import "Account.h"
 #import "ServerController.h"
 #import "User.h"
+#import "UserTableViewCell.h"
 
 static void showAlertWithError(NSError *error)
 {
@@ -37,6 +39,8 @@ static void showAlertWithError(NSError *error)
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.hidesBackButton = YES;
+    self.title = @"Users";
 }
 
 - (void)setAccount:(Account *)account
@@ -52,6 +56,11 @@ static void showAlertWithError(NSError *error)
 
 - (void)fetchUsers
 {
+    [[ServerController sharedController] usersWithAccount:self.account completion:^(NSArray *users, NSError *error) {
+        
+//        NSLog(@"Users [%@]", users);
+    }];
+    
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
     NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:NO];
     fetchRequest.sortDescriptors = @[descriptor];
@@ -69,11 +78,6 @@ static void showAlertWithError(NSError *error)
     if (! fetchSuccessful) {
         showAlertWithError(error);
     }
-    
-    [[ServerController sharedController] usersWithAccount:self.account completion:^(NSArray *users, NSError *error) {
-        
-        NSLog(@"USers [%@]", users);
-    }];
 }
 
 
@@ -87,14 +91,18 @@ static void showAlertWithError(NSError *error)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
+    UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
     
     // Configure the cell...
     User *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    cell.imageView.image =
+    UIImageView *imageView = cell.userImageView;
+    imageView.layer.cornerRadius = CGRectGetHeight(imageView.bounds) * 0.5;
+    imageView.layer.masksToBounds = YES;
+    [imageView setImageWithURL:[NSURL URLWithString:user.imageUrl] placeholderImage:[UIImage imageNamed:@"user_placeholder"]];
     
-    cell.textLabel.text = [user displayName];
-    cell.detailTextLabel.text = [user emailId];
+    NSString *displayName = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+    cell.displayName.text = displayName;
+    cell.emailId.text = user.emailId;
     
     return cell;
 }
@@ -105,6 +113,5 @@ static void showAlertWithError(NSError *error)
 {
     [self.tableView reloadData];
 }
-
 
 @end

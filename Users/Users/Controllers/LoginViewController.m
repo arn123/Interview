@@ -43,6 +43,19 @@
 {
     if ([self.emailIDTF validate])
     {
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Account"];
+        request.predicate = [NSPredicate predicateWithFormat:@"emailId ==[cd] %@", self.emailIDTF.text];
+        
+        NSError *error = nil;
+        NSManagedObjectContext *context = [[ServerController sharedController] mainQueueContext];
+        NSArray *objects = [context executeFetchRequest:request error:&error];
+        
+        if (objects.count)
+        {
+            Account *existingAccount = objects.firstObject;
+            [context deleteObject:existingAccount];
+        }
+        
         Account *account = [[Account alloc] initWithEmailID:self.emailIDTF.text context:[[ServerController sharedController] mainQueueContext]];
         
         UsersTableViewController *usersVC = [self.storyboard instantiateViewControllerWithIdentifier:@"UsersVC"];

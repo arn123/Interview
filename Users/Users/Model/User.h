@@ -19,6 +19,4 @@
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) Account *account;
 
-- (NSString *)displayName;
-
 @end

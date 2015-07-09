@@ -21,6 +21,10 @@
     
     [ServerController sharedController];
     
+    // Appearance
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-DemiBold" size:19.0]}];
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor blueColor]];
+    
     return YES;
 }
 

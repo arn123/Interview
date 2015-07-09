@@ -18,9 +18,4 @@
 @dynamic lastName;
 @dynamic account;
 
-- (NSString *)displayName
-{
-    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
-}
-
 @end

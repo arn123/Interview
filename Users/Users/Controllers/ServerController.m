@@ -71,7 +71,7 @@ NSString * const BaseURL = @"http://surya-interview.appspot.com";
 
 - (void)setupModels
 {
-    RKLogConfigureByName("RestKit/Network*", RKLogLevelTrace);
+//    RKLogConfigureByName("RestKit/Network*", RKLogLevelTrace);
     
     RKObjectManager *objectManager = [RKObjectManager sharedManager];
     
@@ -80,26 +80,11 @@ NSString * const BaseURL = @"http://surya-interview.appspot.com";
     userMapping.identificationAttributes = @[ @"emailId" ];
     [userMapping addAttributeMappingsFromDictionary:@{@"emailId":@"emailId", @"imageUrl":@"imageUrl", @"firstName":@"firstName", @"lastName":@"lastName"}];
     
-    RKResponseDescriptor *responseDescriptor1 = [RKResponseDescriptor responseDescriptorWithMapping:userMapping
-                                                                                            method:RKRequestMethodAny
-                                                                                       pathPattern:nil
-                                                                                           keyPath:nil
-                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:responseDescriptor1];
-    
-    
-    RKObjectMapping *userRequestMapping = [RKObjectMapping requestMapping];
-    [userRequestMapping addAttributeMappingsFromDictionary:@{@"emailId":@"emailId", @"imageUrl":@"imageUrl", @"firstName":@"firstName", @"lastName":@"lastName"}];
-    
-    RKRequestDescriptor* requestDesc1 = [RKRequestDescriptor requestDescriptorWithMapping:userRequestMapping objectClass:[User class] rootKeyPath:nil method:RKRequestMethodAny];
-    [objectManager addRequestDescriptor:requestDesc1];
-    
-    
     // Account
     RKEntityMapping *accountMapping = [RKEntityMapping mappingForEntityForName:@"Account" inManagedObjectStore:objectManager.managedObjectStore];
     accountMapping.identificationAttributes = @[@"emailId"];
     [accountMapping addAttributeMappingsFromDictionary:@{@"emailId":@"emailId"}];
-    [accountMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"users" toKeyPath:@"users" withMapping:userMapping]];
+    [accountMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"items" toKeyPath:@"users" withMapping:userMapping]];
     
     RKResponseDescriptor *responseDescriptor2 = [RKResponseDescriptor responseDescriptorWithMapping:accountMapping
                                                                       method:RKRequestMethodAny
@@ -107,14 +92,6 @@ NSString * const BaseURL = @"http://surya-interview.appspot.com";
                                                                      keyPath:nil
                                                                  statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [objectManager addResponseDescriptor:responseDescriptor2];
-    
-    
-    RKObjectMapping *accountRequestMapping = [RKObjectMapping requestMapping];
-    [accountRequestMapping addAttributeMappingsFromDictionary:@{@"emailId":@"emailId"}];
-    
-    RKRequestDescriptor* requestDesc2 = [RKRequestDescriptor requestDescriptorWithMapping:accountRequestMapping objectClass:[Account class] rootKeyPath:nil method:RKRequestMethodAny];
-    [objectManager addRequestDescriptor:requestDesc2];
-    
 }
 
 - (NSManagedObjectContext *)mainQueueContext
@@ -124,9 +101,10 @@ NSString * const BaseURL = @"http://surya-interview.appspot.com";
 
 - (void)usersWithAccount:(Account *)account completion:(void(^)(NSArray *users, NSError *error))block
 {
-    [[RKObjectManager sharedManager] postObject:nil path:@"list" parameters:@{@"emailId":account.emailId} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [[RKObjectManager sharedManager] postObject:account path:@"list" parameters:@{@"emailId":account.emailId} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         
-        block(mappingResult.dictionary[@"items"], nil);
+        NSArray *users = mappingResult.dictionary[@"items"];
+        block(users, nil);
         
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         block(nil, error);

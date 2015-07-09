@@ -24,7 +24,6 @@
         if (self)
         {
             self.emailId = emailID;
-            [context save:nil];
         }
         
         return self;

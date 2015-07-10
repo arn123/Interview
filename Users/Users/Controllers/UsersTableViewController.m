@@ -13,13 +13,14 @@
 #import "ServerController.h"
 #import "User.h"
 #import "UserTableViewCell.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 static void showAlertWithError(NSError *error)
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                     message:[error localizedDescription]
                                                    delegate:nil
-                                          cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                          cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
     [alert show];
 }
 
@@ -56,9 +57,8 @@ static void showAlertWithError(NSError *error)
 
 - (void)fetchUsers
 {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Loading...", nil)];
     [[ServerController sharedController] usersWithAccount:self.account completion:^(NSArray *users, NSError *error) {
-        
-//        NSLog(@"Users [%@]", users);
     }];
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
@@ -112,6 +112,8 @@ static void showAlertWithError(NSError *error)
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView reloadData];
+    
+    [SVProgressHUD dismiss];
 }
 
 @end

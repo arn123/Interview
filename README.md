@@ -1,5 +1,11 @@
 # Interview
-Sample code
+Sample code for demonstrating implementation of simple Restful web services over HTTP.
+
+Installation
+
+Universal app requiring iOS 8 and above.
+
+Uses RestKit with CoreData - 3rd party library for client server communication and persistence. 
 
 Problem
 
